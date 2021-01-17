@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Список вакансий
+{% endblock %}
+
+{% block content %}
+    <section>
+        <h1 class="h1 text-center mx-auto mt-4 pt-5" style="font-size: 70px;">
+            <strong>
+                {% url 'vacancies_list_url' as vacancies_list_url %}
+                {% if request.path == vacancies_list_url %}
+                    Все вакансии
+                {% else %}
+                    {{ object_list.vacancies.first.specialty.title }}
+                {% endif %}
+
+            </strong>
+        </h1>
+        <p class="text-center pt-1">{{ object_list.vacancies.all.count }} вакансий</p>
+        <div class="row mt-5">
+            <div class="col-12 col-lg-8 offset-lg-2 m-auto">
+                {% for vacancy in object_list.vacancies %}
+                    {% include 'vacancies/includes/vacancy_card.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
