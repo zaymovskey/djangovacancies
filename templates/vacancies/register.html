@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Регистрация
+{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-8 col-lg-4 offset-2 offset-lg-4">
+            {% crispy form  %}
+            <div class="mt-4 text-center"><p>Есть аккаунт? <a href="{% url 'login_url' %}">Войдите!</a></p></div>
+        </div>
+    </div>
+{% endblock %}

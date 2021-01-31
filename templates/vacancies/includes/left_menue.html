@@ -1,0 +1,9 @@
+{% url 'my_company_update_url' request.user.company.id as my_company_update_url %}
+{% url 'my_company_vacancies_url' request.user.company.id as my_company_vacancies_url %}
+<aside class="pt-3 pb-4 px-4 mb-5 card">
+    <h1 class="h4 pt-2 pb-2">Моя компания</h1>
+    <div class="nav flex-column nav-pills">
+        <a class="nav-link {% if request.path == my_company_update_url %}active{% endif %}" href="{% url 'my_company_update_url' request.user.company.id %}">1. Информация о&nbsp;компании</a>
+        <a class="nav-link {% if request.path == my_company_vacancies_url %}active{% endif %}" href="{% url 'my_company_vacancies_url' request.user.company.id %}">2. Вакансии</a>
+    </div>
+</aside>

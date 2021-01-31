@@ -16,16 +16,37 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-            <ul class="navbar-nav col-10">
+            <ul class="navbar-nav col-9">
                 {% url 'vacancies_list_url' as vacancies_list_url %}
                 <li class="nav-item {% if request.path == vacancies_list_url %}active{% endif %}">
                     <a class="nav-link" href="{% url 'vacancies_list_url' %}">Вакансии</a>
                 </li>
             </ul>
-            <ul class="navbar-nav col-2 justify-content-end">
-                <li class="nav-item active">
-                    <a href="#" class="nav-link font-weight-bold">Вход</a>
-                </li>
+            <ul class="navbar-nav col-3 justify-content-end">
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item active">
+                        <div class="btn-group">
+                            <button type="button" class="btn dropdown-toggle font-weight-bold" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ request.user.first_name }} {{ request.user.last_name }}
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right mt-3">
+                                <a href="#" class="dropdown-item py-2">Профиль</a>
+                                <a href="#" class="dropdown-item py-2">Резюме</a>
+                                {% if request.user.company %}
+                                    <a href="{% url 'my_company_update_url' request.user.company.id %}" class="dropdown-item py-2">Компания</a>
+                                {% else %}
+                                    <a href="{% url 'my_company_to_create_url' %}" class="dropdown-item py-2">Компания</a>
+                                {% endif %}
+
+                                <a href="{% url 'logout_url' %}" class="dropdown-item py-2">Выйти</a>
+                            </div>
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="nav-item active">
+                        <a href="{% url 'login_url' %}" class="nav-link font-weight-bold">Вход/Регистрация</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </nav>

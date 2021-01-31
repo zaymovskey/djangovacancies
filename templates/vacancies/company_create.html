@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Моя компания
+{% endblock %}
+
+{% block content %}
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body px-4 pb-4">
+                    <section class="tab-pane fade show active">
+                        <h2 class="h4 pt-2 pb-3">Информация о&nbsp;компании</h2>
+                        {% crispy form %}
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

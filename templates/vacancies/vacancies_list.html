@@ -12,15 +12,15 @@
                 {% if request.path == vacancies_list_url %}
                     Все вакансии
                 {% else %}
-                    {{ object_list.vacancies.first.specialty.title }}
+                    {{ vacancies.first.specialty.title }}
                 {% endif %}
 
             </strong>
         </h1>
-        <p class="text-center pt-1">{{ object_list.vacancies.all.count }} вакансий</p>
+        <p class="text-center pt-1">{{ vacancies.all.count }} вакансий</p>
         <div class="row mt-5">
             <div class="col-12 col-lg-8 offset-lg-2 m-auto">
-                {% for vacancy in object_list.vacancies %}
+                {% for vacancy in vacancies %}
                     {% include 'vacancies/includes/vacancy_card.html' %}
                 {% endfor %}
             </div>

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+
+{% endblock %}
+
+
+{% block content %}
+    <div class="row mt-5">
+        <div class="col-12 col-lg-4">
+            {% include 'vacancies/includes/left_menue.html' %}
+        </div>
+        <div class="col-12 col-lg-8">
+            <div class="card">
+                <div class="card-body px-4 pb-4">
+                    <section class="tab-pane fade show active">
+                        <h2 class="h4 pt-2 pb-3">Вакансии</h2>
+                        <a href="{% url 'vacancy_create_url' %}" class="btn btn-outline-info">Добавить вакансию</a>
+                        {% for vacancy in company.vacancies.all %}
+                            <!-- vacancy state 1 -->
+                            <div class="card mt-3">
+                                <div class="card-body px-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-6 col-lg-8">
+                                            <h6 class="mb-1">{{ vacancy.title }}</h6>
+                                            <p class="mb-1">
+                                                <span class="mr-4">{{ vacancy.salary_max }}</span><a href="{% url 'my_company_vacancies_update_url' vacancy.id %}" class="text-info">{{ vacancy.applications.count }} отклика</a>
+                                            </p>
+                                        </div>
+                                        <div class="col-6 col-lg-4 text-right">
+                                            <a href="{% url 'my_company_vacancies_update_url' vacancy.id %}" class="btn btn-outline-info">Изменить</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
